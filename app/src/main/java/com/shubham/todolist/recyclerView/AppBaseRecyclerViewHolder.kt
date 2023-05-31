@@ -1,4 +1,4 @@
-package com.appservice.recyclerView
+package com.shubham.todolist.recyclerView
 
 import android.content.Context
 import android.content.res.Resources

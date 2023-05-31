@@ -1,4 +1,4 @@
-package com.shubham.todolist.customViews
+package com.shubham.todolist.utils.customViews
 
 import android.content.Context
 import android.util.AttributeSet

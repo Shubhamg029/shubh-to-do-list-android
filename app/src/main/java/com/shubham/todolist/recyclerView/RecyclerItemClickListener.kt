@@ -1,4 +1,4 @@
-package com.appservice.recyclerView
+package com.shubham.todolist.recyclerView
 
 
 interface RecyclerItemClickListener {

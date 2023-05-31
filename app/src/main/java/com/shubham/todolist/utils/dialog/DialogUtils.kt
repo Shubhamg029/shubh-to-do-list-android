@@ -1,22 +1,24 @@
-package com.shubham.todolist.utils
+package com.shubham.todolist.utils.dialog
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.shubham.todolist.R
 import com.shubham.todolist.base.BaseActivity
 
 object DialogUtils {
 
-    fun materialConfirmationDialog(){
+    fun materialConfirmationDialog(baseActivity: BaseActivity<*>,
+                                   dialogClickListener: DialogClickListener,
+                                   title: String,
+                                   message:String){
         MaterialAlertDialogBuilder(baseActivity)
-            .setTitle(resources.getString(R.string.title))
-            .setNeutralButton(resources.getString(R.string.cancel)) { dialog, which ->
-                // Respond to neutral button press
+            .setTitle(title)
+            .setMessage(message)
+            .setNeutralButton(baseActivity.getString(R.string.cancel)) { dialog, _ ->
+                dialog.dismiss()
             }
-            .setPositiveButton(resources.getString(R.string.ok)) { dialog, which ->
-                // Respond to positive button press
-            }
-            // Single-choice items (initialized with checked item)
-            .setSingleChoiceItems(singleItems, checkedItem) { dialog, which ->
-                // Respond to item chosen
+            .setPositiveButton(baseActivity.getString(R.string.ok)) { dialog, _ ->
+                dialogClickListener.onPositiveButtonClick()
+                dialog.dismiss()
             }
             .show()
     }

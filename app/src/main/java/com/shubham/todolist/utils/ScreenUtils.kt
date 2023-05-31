@@ -1,4 +1,4 @@
-package com.framework.utils
+package com.shubham.todolist.utils
 
 import android.app.Activity
 import android.app.Dialog
@@ -32,28 +32,4 @@ class ScreenUtils {
     return getDisplayMetrics(activity).heightPixels
   }
 
-  fun setWhiteNavigationBar(@NonNull dialog: Dialog) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-      if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
-        try {
-          val window: Window? = dialog.window
-          if (window != null) {
-            val metrics = DisplayMetrics()
-            window.windowManager.defaultDisplay.getMetrics(metrics)
-            val dimDrawable = GradientDrawable()
-            // ...customize your dim effect here
-            val navigationBarDrawable = GradientDrawable()
-            navigationBarDrawable.shape = GradientDrawable.RECTANGLE
-            navigationBarDrawable.setColor(Color.WHITE)
-            val layers = arrayOf<Drawable>(dimDrawable, navigationBarDrawable)
-            val windowBackground = LayerDrawable(layers)
-            windowBackground.setLayerInsetTop(1, metrics.heightPixels)
-            window.setBackgroundDrawable(windowBackground)
-          }
-        } catch (e: Exception) {
-          e.printStackTrace()
-        }
-      }
-    }
-  }
 }

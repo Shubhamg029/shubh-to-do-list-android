@@ -1,4 +1,4 @@
-package com.framework.base
+package com.shubham.todolist.base
 
 import android.app.Activity
 import android.app.ProgressDialog
@@ -19,23 +19,18 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import com.framework.R
-import com.framework.analytics.UserExperiorController
-import com.framework.helper.Navigator
-import com.framework.models.BaseViewModel
-import com.framework.utils.hideKeyBoard
 import com.google.android.material.snackbar.Snackbar
+import com.shubham.todolist.R
+import com.shubham.todolist.extensions.hideKeyBoard
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
 abstract class BaseFragment<Binding : ViewDataBinding, ViewModel : BaseViewModel> : Fragment(), View.OnClickListener {
 
-  protected lateinit var baseActivity: BaseActivity<*, *>
+  protected lateinit var baseActivity: BaseActivity<*>
   protected lateinit var root: View
   protected var viewModel: ViewModel? = null
   protected lateinit var binding: Binding
-  protected var navigator: Navigator? = null
   protected var compositeDisposable = CompositeDisposable()
   private var progressDialog: ProgressDialog? = null
 
@@ -46,7 +41,7 @@ abstract class BaseFragment<Binding : ViewDataBinding, ViewModel : BaseViewModel
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    baseActivity = activity as BaseActivity<*, *>
+    baseActivity = activity as BaseActivity<*>
     viewModel = ViewModelProvider(this).get(getViewModelClass())
   }
 
@@ -54,7 +49,6 @@ abstract class BaseFragment<Binding : ViewDataBinding, ViewModel : BaseViewModel
     setHasOptionsMenu(true)
     binding = DataBindingUtil.inflate(inflater, getLayout(), container, false)
     binding.lifecycleOwner = this
-    navigator = Navigator(baseActivity)
     return binding.root
   }
 
@@ -74,28 +68,6 @@ abstract class BaseFragment<Binding : ViewDataBinding, ViewModel : BaseViewModel
     for (observable in observables) {
       observable?.let { compositeDisposable.add(it) }
     }
-  }
-
-
-  override fun onResume() {
-    super.onResume()
-    Log.d("user experior", "onResume: userexperior ${binding!!::class.simpleName}${viewModel!!::class.simpleName}")
-    UserExperiorController.startScreen("${binding!!::class.simpleName}${viewModel!!::class.simpleName}")
-  }
-
-  fun showSnackBarNegative(msg: String) {
-    val snackBar = Snackbar.make(baseActivity.findViewById(android.R.id.content), msg, Snackbar.LENGTH_INDEFINITE)
-    snackBar.view.setBackgroundColor(ContextCompat.getColor(baseActivity, R.color.snackbar_negative_color))
-    snackBar.duration = 4000
-    snackBar.show()
-  }
-
-
-  fun showSnackBarPositive(msg: String) {
-    val snackBar = Snackbar.make(baseActivity.findViewById(android.R.id.content), msg, Snackbar.LENGTH_INDEFINITE)
-    snackBar.view.setBackgroundColor(ContextCompat.getColor(baseActivity, R.color.snackbar_positive_color))
-    snackBar.duration = 4000
-    snackBar.show()
   }
 
   override fun onDestroy() {
@@ -124,43 +96,6 @@ abstract class BaseFragment<Binding : ViewDataBinding, ViewModel : BaseViewModel
 
   protected open fun getObservables(): List<Disposable?> {
     return listOf()
-  }
-
-  // Transactions
-  open fun addFragmentReplace(containerID: Int?, fragment: Fragment?, addToBackStack: Boolean, showAnim: Boolean = false) {
-    if (activity?.supportFragmentManager?.isDestroyed == true) return
-    if (containerID == null || fragment == null) return
-
-    val fragmentTransaction = activity?.supportFragmentManager?.beginTransaction()
-    if (showAnim) {
-      fragmentTransaction?.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
-    }
-
-
-    if (addToBackStack) {
-      fragmentTransaction?.addToBackStack(fragment.javaClass.name)
-    }
-    fragmentTransaction?.replace(containerID, fragment, fragment.javaClass.name)?.commit()
-  }
-
-  open fun addFragment(containerID: Int?, fragment: Fragment?, addToBackStack: Boolean, showAnim: Boolean = false) {
-    if (activity?.supportFragmentManager?.isDestroyed == true) return
-    if (containerID == null || fragment == null) return
-
-    val fragmentTransaction = baseActivity.supportFragmentManager.beginTransaction()
-    if (showAnim) {
-      fragmentTransaction?.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
-    }
-    if (addToBackStack) {
-      fragmentTransaction.addToBackStack(fragment.javaClass.name)
-    }
-    fragmentTransaction.add(containerID, fragment, fragment.javaClass.name).commit()
-  }
-
-  fun removeFragment(name: String) {
-    val fm = activity?.supportFragmentManager
-    fm?.popBackStack(name, 0)
-    activity?.supportFragmentManager?.popBackStack()
   }
 
   fun getTopFragment(): Fragment? {

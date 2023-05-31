@@ -1,4 +1,4 @@
-package com.appservice.recyclerView
+package com.shubham.todolist.recyclerView
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView

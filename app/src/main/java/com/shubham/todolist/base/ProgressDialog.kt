@@ -1,15 +1,13 @@
-package com.dashboard.base
+package com.shubham.todolist.base
 
 import android.util.Log
 import androidx.fragment.app.FragmentManager
-import com.dashboard.R
-import com.dashboard.databinding.DashboardProgressDialogBinding
-import com.framework.base.BaseDialogFragment
-import com.framework.models.BaseViewModel
-import com.framework.utils.ConversionUtils
-import com.framework.utils.ScreenUtils
+import com.shubham.todolist.R
+import com.shubham.todolist.databinding.DialogProgressBinding
+import com.shubham.todolist.utils.ConversionUtils
+import com.shubham.todolist.utils.ScreenUtils
 
-class ProgressDialog : BaseDialogFragment<DashboardProgressDialogBinding, BaseViewModel>() {
+class ProgressDialog : BaseDialogFragment<DialogProgressBinding, BaseViewModel>() {
   private var title: CharSequence? = null
 
   companion object {
@@ -24,7 +22,7 @@ class ProgressDialog : BaseDialogFragment<DashboardProgressDialogBinding, BaseVi
   }
 
   override fun getLayout(): Int {
-    return R.layout.dashboard_progress_dialog
+    return R.layout.dialog_progress
   }
 
   override fun getViewModelClass(): Class<BaseViewModel> {
@@ -39,7 +37,7 @@ class ProgressDialog : BaseDialogFragment<DashboardProgressDialogBinding, BaseVi
     title?.let { binding?.title?.text = it }
   }
 
-  override fun getWidth(): Int? {
+  override fun getWidth(): Int {
     return ScreenUtils.instance.getWidth(activity) - ConversionUtils.dp2px(32f)
   }
 

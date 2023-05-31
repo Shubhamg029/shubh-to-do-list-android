@@ -1,6 +1,5 @@
-package com.framework.base
+package com.shubham.todolist.base
 
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,25 +10,18 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import com.framework.helper.Navigator
-import com.framework.models.BaseViewModel
-import com.framework.views.blur.BlurView
-import com.framework.views.blur.RenderScriptBlur
 
 abstract class BaseDialogFragment<T : ViewDataBinding, ViewModel : BaseViewModel> : DialogFragment(), View.OnClickListener {
 
   protected var binding: T? = null
   protected var viewModel: ViewModel? = null
-  protected lateinit var baseActivity: BaseActivity<*, *>
+  protected lateinit var baseActivity: BaseActivity<*>
   protected abstract fun getViewModelClass(): Class<ViewModel>
-  protected var navigator: Navigator? = null
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     binding = DataBindingUtil.inflate(inflater, getLayout(), container, false)
-    baseActivity = activity as BaseActivity<*, *>
+    baseActivity = activity as BaseActivity<*>
     viewModel = ViewModelProvider(this).get(getViewModelClass())
-    navigator = Navigator(baseActivity)
     return binding?.root
   }
 

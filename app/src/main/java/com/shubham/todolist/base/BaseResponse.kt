@@ -1,12 +1,8 @@
-package com.framework.base
+package com.shubham.todolist.base
 
-import okhttp3.ResponseBody
-import okio.Buffer
-import okio.BufferedSource
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.Serializable
-import java.nio.charset.Charset
 
 open class BaseResponse(
   var taskcode: Int? = null,
@@ -16,7 +12,6 @@ open class BaseResponse(
   var stringResponse: String? = null,
   var arrayResponse: Array<*>? = null,
   var anyResponse: Any? = null,
-  var responseBody: ResponseBody? = null,
 ) : Serializable {
 
   //Deprecate
@@ -108,30 +103,5 @@ open class BaseResponse(
 
   fun isSuccess(): Boolean {
     return status == 200 || status == 201 || status == 202 || status == 204
-  }
-
-  fun parseStringResponse(): String? {
-    return try {
-      val source: BufferedSource? = responseBody?.source()
-      source?.request(Long.MAX_VALUE)
-      val buffer: Buffer? = source?.buffer
-      buffer?.clone()?.readString(Charset.forName("UTF-8"))
-    } catch (e: Exception) {
-      e.printStackTrace()
-      ""
-    }
-  }
-
-  fun parseResponse(): Boolean {
-    return try {
-      val source: BufferedSource? = responseBody?.source()
-      source?.request(Long.MAX_VALUE)
-      val buffer: Buffer? = source?.buffer
-      val responseBodyString: String? = buffer?.clone()?.readString(Charset.forName("UTF-8"))
-      responseBodyString.toBoolean()
-    } catch (e: Exception) {
-      e.printStackTrace()
-      false
-    }
   }
 }

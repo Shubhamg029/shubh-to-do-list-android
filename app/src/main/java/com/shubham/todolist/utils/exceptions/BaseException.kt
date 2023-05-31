@@ -1,4 +1,4 @@
-package com.framework.exceptions
+package com.shubham.todolist.utils.exceptions
 
 open class BaseException : Exception {
 

@@ -1,6 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/chk_bx_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="16dp"
+        android:layout_marginStart="16dp"
+        tools:checked="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_task_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="@color/black_161717"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_pending"
+        app:layout_constraintEnd_toStartOf="@+id/guide_center"
+        app:layout_constraintStart_toEndOf="@+id/chk_bx_task"
+        app:layout_constraintTop_toTopOf="@+id/chk_bx_task"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Market Research" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_pending"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:visibility="gone"
+        android:text="@string/pending"
+        android:textColor="@color/black_45_percent"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/chk_bx_task"
+        app:layout_constraintEnd_toEndOf="@+id/tv_task_title"
+        app:layout_constraintStart_toStartOf="@+id/tv_task_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_task_title" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="@color/black_161717"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/chk_bx_task"
+        app:layout_constraintEnd_toStartOf="@+id/iv_remove"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/guide_center"
+        app:layout_constraintTop_toTopOf="@+id/chk_bx_task"
+        tools:text="12:55 AM" />
+
+    <ImageView
+        android:id="@+id/iv_remove"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:scaleType="center"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_close"
+        app:layout_constraintBottom_toBottomOf="@+id/chk_bx_task"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/chk_bx_task" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.60" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

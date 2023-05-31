@@ -2,4 +2,12 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="black_1D1B20">#1D1B20</color>
+    <color name="black_161717">#161717</color>
+    <color name="gray_79747E">#79747E</color>
+    <color name="gray_B7B7B7">#B7B7B7</color>
+    <color name="pink_FEF7FF">#FEF7FF</color>
+    <color name="pink_ECE6F0">#ECE6F0</color>
+    <color name="black_45_percent">#73000000</color>
+    <color name="red_EF0000">#EF0000</color>
 </resources>
