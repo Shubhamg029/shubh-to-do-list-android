@@ -11,7 +11,7 @@ import com.shubham.todolist.base.AppBaseActivity
 import com.shubham.todolist.base.BaseFragment
 import com.shubham.todolist.constant.FragmentType
 import com.shubham.todolist.databinding.ActivityHomeContainerBinding
-import com.shubham.todolist.extensions.setFragmentType
+import com.shubham.todolist.utils.extensions.setFragmentType
 import com.shubham.todolist.ui.fragments.AddNewTaskFragment
 import com.shubham.todolist.ui.fragments.TaskListFragment
 import com.shubham.todolist.utils.ConversionUtils
@@ -94,19 +94,12 @@ open class HomeContainerActivity : AppBaseActivity<ActivityHomeContainerBinding>
             else -> throw IllegalFragmentTypeException()
         }
     }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        for (fragment in supportFragmentManager.fragments) {
-            fragment.onActivityResult(requestCode, resultCode, data)
-        }
-    }
 }
 
-fun AppCompatActivity.startFragmentHomeActivity(type: FragmentType, bundle: Bundle = Bundle(), clearTop: Boolean = false, isResult: Boolean = false, requestCode: Int = 101) {
+fun AppCompatActivity.startFragmentHomeActivity(type: FragmentType, bundle: Bundle = Bundle(), clearTop: Boolean = false) {
     val intent = Intent(this, HomeContainerActivity::class.java)
     intent.putExtras(bundle)
     intent.setFragmentType(type)
     if (clearTop) intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-    if (isResult.not()) startActivity(intent) else startActivityForResult(intent, requestCode)
+    startActivity(intent)
 }

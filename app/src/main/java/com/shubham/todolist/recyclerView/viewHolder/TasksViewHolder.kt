@@ -1,15 +1,14 @@
 package com.shubham.todolist.recyclerView.viewHolder
 
-import android.util.Log
 import android.view.View
 import com.shubham.todolist.R
 import com.shubham.todolist.constant.RecyclerViewActionType
 import com.shubham.todolist.databinding.ItemTaskBinding
-import com.shubham.todolist.extensions.setTextColorCustom
-import com.shubham.todolist.extensions.strikeThrough
+import com.shubham.todolist.db.Task
+import com.shubham.todolist.utils.extensions.setTextColorCustom
+import com.shubham.todolist.utils.extensions.strikeThrough
 import com.shubham.todolist.recyclerView.AppBaseRecyclerViewHolder
 import com.shubham.todolist.recyclerView.BaseRecyclerViewItem
-import com.shubham.todolist.room.Task
 import com.shubham.todolist.utils.TimeUtils
 
 

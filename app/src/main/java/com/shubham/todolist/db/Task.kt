@@ -1,4 +1,4 @@
-package com.shubham.todolist.room
+package com.shubham.todolist.db
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

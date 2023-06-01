@@ -1,4 +1,4 @@
-package com.shubham.todolist.extensions
+package com.shubham.todolist.utils.extensions
 
 import android.app.Activity
 import android.content.Context

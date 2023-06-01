@@ -5,7 +5,7 @@ import android.content.Intent
 import com.shubham.todolist.R
 import com.shubham.todolist.base.AppBaseActivity
 import com.shubham.todolist.databinding.ActivitySplashBinding
-import com.shubham.todolist.extensions.startHomeActivity
+import com.shubham.todolist.utils.extensions.startHomeActivity
 
 class SplashActivity : AppBaseActivity<ActivitySplashBinding>() {
 

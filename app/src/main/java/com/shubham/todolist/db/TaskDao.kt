@@ -1,8 +1,8 @@
-package com.shubham.todolist.room
+package com.shubham.todolist.db
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import io.reactivex.Single
 
@@ -12,7 +12,7 @@ interface TaskDao {
     @Query("SELECT * FROM TaskList")
     fun getAll() : Single<List<Task>>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertTask(task: Task)
 
     @Insert

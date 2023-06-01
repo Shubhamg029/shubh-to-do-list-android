@@ -14,7 +14,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.shubham.todolist.utils.customViews.CustomToolbar
-import com.shubham.todolist.extensions.hideKeyBoard
+import com.shubham.todolist.utils.extensions.hideKeyBoard
 import com.shubham.todolist.utils.ConversionUtils
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable

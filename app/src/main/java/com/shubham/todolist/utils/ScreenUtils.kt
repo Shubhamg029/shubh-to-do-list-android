@@ -28,8 +28,4 @@ class ScreenUtils {
     return getDisplayMetrics(activity).widthPixels
   }
 
-  fun getHeight(activity: Activity?): Int {
-    return getDisplayMetrics(activity).heightPixels
-  }
-
 }

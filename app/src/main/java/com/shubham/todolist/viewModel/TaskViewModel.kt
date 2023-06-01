@@ -4,8 +4,8 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.shubham.todolist.base.BaseViewModel
-import com.shubham.todolist.room.AppDatabase
-import com.shubham.todolist.room.Task
+import com.shubham.todolist.db.AppDatabase
+import com.shubham.todolist.db.Task
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

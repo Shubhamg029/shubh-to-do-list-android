@@ -1,29 +1,23 @@
 package com.shubham.todolist.ui.fragments
 
-import android.annotation.SuppressLint
 import android.app.Activity.RESULT_CANCELED
 import android.app.Activity.RESULT_OK
-import android.app.TimePickerDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import androidx.lifecycle.Observer
-import androidx.room.util.findColumnIndexBySuffix
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.shubham.todolist.R
-import com.shubham.todolist.base.AppBaseFragment
+import com.shubham.todolist.base.BaseFragment
 import com.shubham.todolist.databinding.FragmentAddNewTaskBinding
-import com.shubham.todolist.room.Task
+import com.shubham.todolist.db.Task
 import com.shubham.todolist.utils.TimeUtils
 import com.shubham.todolist.viewModel.TaskViewModel
 import java.util.Calendar
 
-class AddNewTaskFragment : AppBaseFragment<FragmentAddNewTaskBinding, TaskViewModel>() {
+class AddNewTaskFragment : BaseFragment<FragmentAddNewTaskBinding, TaskViewModel>() {
 
     private var taskTime:String = ""
     private var taskTimeInMilliseconds:Long = 0L
@@ -131,7 +125,8 @@ class AddNewTaskFragment : AppBaseFragment<FragmentAddNewTaskBinding, TaskViewMo
                     amPM = amPmTime,
                     taskTime = taskTime,
                     taskTimeInMilliseconds = taskTimeInMilliseconds,
-                    isPending = false))
+                    isPending = false)
+            )
             viewModel?.loadTasks()
             baseActivity.setResult(RESULT_OK)
             baseActivity.finish()

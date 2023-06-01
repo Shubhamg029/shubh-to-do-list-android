@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.widget.ImageButton
 import android.widget.TextView
 import com.google.android.material.appbar.MaterialToolbar
-import com.shubham.todolist.extensions.getChildOrNull
+import com.shubham.todolist.utils.extensions.getChildOrNull
 
 
 class CustomToolbar : MaterialToolbar {

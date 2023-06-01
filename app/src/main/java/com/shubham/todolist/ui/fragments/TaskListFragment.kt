@@ -5,26 +5,26 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shubham.todolist.R
-import com.shubham.todolist.base.AppBaseFragment
+import com.shubham.todolist.base.BaseFragment
 import com.shubham.todolist.constant.FragmentType
 import com.shubham.todolist.constant.RecyclerViewActionType
 import com.shubham.todolist.databinding.FragmentTaskListBinding
+import com.shubham.todolist.db.Task
 import com.shubham.todolist.recyclerView.AppBaseRecyclerViewAdapter
 import com.shubham.todolist.recyclerView.BaseRecyclerViewItem
 import com.shubham.todolist.recyclerView.RecyclerItemClickListener
-import com.shubham.todolist.room.Task
 import com.shubham.todolist.ui.startFragmentHomeActivity
 import com.shubham.todolist.utils.dialog.DialogClickListener
 import com.shubham.todolist.utils.dialog.DialogUtils.materialConfirmationDialog
 import com.shubham.todolist.viewModel.TaskViewModel
 
-class TaskListFragment : AppBaseFragment<FragmentTaskListBinding, TaskViewModel>(),
+class TaskListFragment : BaseFragment<FragmentTaskListBinding, TaskViewModel>(),
     RecyclerItemClickListener, DialogClickListener {
 
     private var taskList: ArrayList<Task> = arrayListOf()
     private var positionGlobal:Int = 0
     private var taskAdapter: AppBaseRecyclerViewAdapter<Task>? = null
-    private lateinit var taskClicked:Task
+    private lateinit var taskClicked: Task
 
     companion object {
         @JvmStatic

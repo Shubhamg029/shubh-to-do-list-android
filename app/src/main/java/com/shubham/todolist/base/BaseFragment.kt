@@ -21,7 +21,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.shubham.todolist.R
-import com.shubham.todolist.extensions.hideKeyBoard
+import com.shubham.todolist.utils.extensions.hideKeyBoard
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
