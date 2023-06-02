@@ -156,12 +156,12 @@ class TaskListFragment : BaseFragment<FragmentTaskListBinding, TaskViewModel>(),
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_filter_ascending -> {
-                //filterTasks(true)
+                filterTasks(true)
                 true
             }
 
             R.id.menu_filter_descending -> {
-                //filterTasks(false)
+                filterTasks(false)
                 true
             }
 
