@@ -5,6 +5,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        release {
+            keyAlias 'patchmanage'
+            keyPassword 'PatchManage2023'
+            storeFile file("../keystore/boost/my-release-key.keystore")
+            storePassword 'PatchManage2023'
+        }
+    }
     namespace 'com.shubham.todolist'
     compileSdk 33
 

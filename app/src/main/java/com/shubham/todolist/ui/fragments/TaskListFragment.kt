@@ -125,9 +125,13 @@ class TaskListFragment : BaseFragment<FragmentTaskListBinding, TaskViewModel>(),
 
     override fun onResume() {
         super.onResume()
+        //Loading Data from DB
         viewModel?.loadTasks()
     }
 
+    /**
+     * Alert Dialog Listener callback Positive "Ok" button
+     * */
     override fun onPositiveButtonClick() {
         var pos = positionGlobal
         if (taskList.size == 1) {
@@ -141,10 +145,7 @@ class TaskListFragment : BaseFragment<FragmentTaskListBinding, TaskViewModel>(),
         }
     }
 
-    override fun onNegativeButtonClick() {
-        //To handle Negative click
-    }
-
+    // Menu Creation for Filter in Toolbar
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_filter, menu)
@@ -153,6 +154,7 @@ class TaskListFragment : BaseFragment<FragmentTaskListBinding, TaskViewModel>(),
     }
 
 
+    //Setting click events to menu in toolbar
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_filter_ascending -> {
@@ -169,6 +171,10 @@ class TaskListFragment : BaseFragment<FragmentTaskListBinding, TaskViewModel>(),
         }
     }
 
+    /**
+     * Param used to use same function for both Filter Buttons
+     * @param isAscending : To pass value to set the mode of Filter
+     * */
     private fun filterTasks(isAscending: Boolean) {
         if (isAscending)
             taskList.sortByDescending { it.taskTimeInMilliseconds }

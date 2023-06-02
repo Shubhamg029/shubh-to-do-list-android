@@ -49,7 +49,7 @@ class AddNewTaskFragment : BaseFragment<FragmentAddNewTaskBinding, TaskViewModel
     }
 
 
-
+    //Item Click listerner for AutoCompleteTextView
     private fun setUpDropDownDayTime() {
         binding.autoTextAmPm.onItemClickListener =
             OnItemClickListener { p0, p1, position, p3 ->
@@ -64,6 +64,7 @@ class AddNewTaskFragment : BaseFragment<FragmentAddNewTaskBinding, TaskViewModel
             }
     }
 
+    //Check to validate if the AM PM selection does not alter the value semantics of Hour Int
     private fun calculateHourValue(isBefore12 : Boolean) {
         if (isBefore12 && pickerHour > 12){
             pickerHour -= 12
@@ -102,6 +103,8 @@ class AddNewTaskFragment : BaseFragment<FragmentAddNewTaskBinding, TaskViewModel
         }
     }
 
+    //Time Calculation Function
+    //To calculate, hour 12 hours user visible format, time to millisecond conversion
     private fun timeCalculation(picker: MaterialTimePicker) {
         var hour = picker.hour
         if (hour > 12){
@@ -131,6 +134,7 @@ class AddNewTaskFragment : BaseFragment<FragmentAddNewTaskBinding, TaskViewModel
         baseActivity.finish()
     }
 
+    //Validating & Saving to DB Room
     private fun addTaskToDb() {
         if(validateData()){
             val taskTitle = binding.edtTaskTitle.text.toString()
@@ -151,6 +155,7 @@ class AddNewTaskFragment : BaseFragment<FragmentAddNewTaskBinding, TaskViewModel
         }
     }
 
+    //Details Validation Function
     private fun validateData(): Boolean {
         if (binding.edtTaskTitle.text?.trim().isNullOrEmpty()){
             showShortToast(getString(R.string.please_enter_title))
