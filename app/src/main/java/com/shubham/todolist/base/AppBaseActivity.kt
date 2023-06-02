@@ -6,6 +6,9 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.ViewDataBinding
 import com.shubham.todolist.R
 
+/**
+ * Created by Shubham Gupta on 01/06/2023
+ * */
 abstract class AppBaseActivity<Binding : ViewDataBinding> : BaseActivity<Binding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

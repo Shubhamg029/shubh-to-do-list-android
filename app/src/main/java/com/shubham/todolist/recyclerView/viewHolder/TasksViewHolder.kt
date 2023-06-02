@@ -19,11 +19,11 @@ class TasksViewHolder(binding: ItemTaskBinding) :
         super.bind(position, item)
         val task = item as Task
 
-        compareIfTaskPending(task)
-
         binding.chkBxTask.isChecked = task.isCompleted == true
         val time = task.taskTime.plus(" ").plus(task.amPM)
         binding.tvTime.text = time
+
+        compareIfTaskPending(task)
 
         binding.ivRemove.setOnClickListener {
             listener?.onItemClick(position, item, RecyclerViewActionType.TASK_REMOVE_CLICK.ordinal)
@@ -37,6 +37,7 @@ class TasksViewHolder(binding: ItemTaskBinding) :
 
     private fun compareIfTaskPending(task: Task) {
         if (binding.chkBxTask.isChecked) {
+            binding.tvPending.visibility = View.GONE
             binding.tvTaskTitle.strikeThrough(task.taskTitle.toString())
             binding.tvTaskTitle.setTextColorCustom(R.color.black_161717)
         }else if (TimeUtils.compareTimeStampIfPast(task.taskTimeInMilliseconds ?: 0L)){
@@ -44,6 +45,7 @@ class TasksViewHolder(binding: ItemTaskBinding) :
             binding.tvTaskTitle.text = task.taskTitle
             binding.tvTaskTitle.setTextColorCustom(R.color.red_EF0000)
         } else {
+            binding.tvPending.visibility = View.GONE
             binding.tvTaskTitle.text = task.taskTitle
             binding.tvTaskTitle.setTextColorCustom(R.color.black_161717)
         }

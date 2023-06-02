@@ -15,6 +15,8 @@
     <string name="ok">Ok</string>
     <string name="warning">Warning</string>
     <string name="do_you_want_to_delete_message"><![CDATA[Do you want to delete ---, this action can’t be undone.]]></string>
+    <string name="ascending_order">Ascending Order Filter</string>
+    <string name="descending_order_filter">Descending Order Filter</string>
 
     <string-array name="simple_items_am_pm">
         <item>AM</item>

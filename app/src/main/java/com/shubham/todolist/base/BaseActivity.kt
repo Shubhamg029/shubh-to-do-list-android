@@ -19,6 +19,10 @@ import com.shubham.todolist.utils.ConversionUtils
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
+/**
+ * Created by Shubham Gupta on 01/06/2023
+ * Purpose: To provide all the basic necessary functionality to all the Activities extended with this.
+ * */
 abstract class BaseActivity<Binding : ViewDataBinding> : AppCompatActivity(), View.OnClickListener {
 
   protected open var TAG = this.javaClass.simpleName

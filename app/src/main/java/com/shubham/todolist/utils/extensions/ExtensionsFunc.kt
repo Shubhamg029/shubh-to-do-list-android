@@ -46,7 +46,7 @@ fun AppCompatActivity.startHomeActivity() {
 
 fun TextView.strikeThrough(stringText:String){
   val strike = SpannableString(stringText)
-  strike.setSpan(StrikethroughSpan(), 0, strike.length.minus(1), SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE)
+  strike.setSpan(StrikethroughSpan(), 0, strike.length, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE)
   this.text = strike
 }
 

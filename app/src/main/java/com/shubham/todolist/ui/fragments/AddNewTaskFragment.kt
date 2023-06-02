@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
+import android.widget.AdapterView.OnItemClickListener
 import android.widget.AdapterView.OnItemSelectedListener
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
@@ -22,6 +23,8 @@ class AddNewTaskFragment : BaseFragment<FragmentAddNewTaskBinding, TaskViewModel
     private var taskTime:String = ""
     private var taskTimeInMilliseconds:Long = 0L
     private var isPM:Boolean = false
+    private var pickerHour = 0
+    private var pickerMinute = 0
 
     companion object {
         @JvmStatic
@@ -48,18 +51,30 @@ class AddNewTaskFragment : BaseFragment<FragmentAddNewTaskBinding, TaskViewModel
 
 
     private fun setUpDropDownDayTime() {
-        binding.autoTextAmPm.apply {
-            onItemSelectedListener = object : OnItemSelectedListener {
-                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                    isPM = true
+        binding.autoTextAmPm.onItemClickListener =
+            OnItemClickListener { p0, p1, position, p3 ->
+                when(position){
+                    0 -> {
+                        calculateHourValue(true)
+                    }
+                    1 -> {
+                        calculateHourValue(false)
+                    }
                 }
-
-                override fun onNothingSelected(p0: AdapterView<*>?) {
-                    isPM = true
-                }
-
             }
+    }
+
+    private fun calculateHourValue(isBefore12 : Boolean) {
+        if (isBefore12 && pickerHour > 12){
+            pickerHour -= 12
+        }else if (isBefore12.not() && pickerHour < 12){
+            pickerHour += 12
         }
+
+        val cal = Calendar.getInstance()
+        cal.set(Calendar.HOUR_OF_DAY, pickerHour)
+        cal.set(Calendar.MINUTE, pickerMinute)
+        taskTimeInMilliseconds = cal.timeInMillis
     }
 
     override fun onClick(v: View) {
@@ -102,10 +117,13 @@ class AddNewTaskFragment : BaseFragment<FragmentAddNewTaskBinding, TaskViewModel
         taskTime = timeWithoutDay
 
         val cal = Calendar.getInstance()
-        cal.set(Calendar.HOUR_OF_DAY, picker.hour)
+        pickerHour = picker.hour
+        pickerMinute = picker.minute
+        cal.set(Calendar.HOUR_OF_DAY, pickerHour)
         cal.set(Calendar.MINUTE, picker.minute)
         taskTimeInMilliseconds = cal.timeInMillis
-        Log.i("yellow", "AddNewTask Time in milli:".plus(taskTimeInMilliseconds))
+        val amPmString = TimeUtils.getIfTimeIsPast12(pickerHour)
+        binding.autoTextAmPm.setText(amPmString, false)
     }
 
     private fun cancelAndClosePage() {

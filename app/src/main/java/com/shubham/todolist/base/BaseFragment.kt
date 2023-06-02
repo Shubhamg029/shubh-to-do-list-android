@@ -25,6 +25,10 @@ import com.shubham.todolist.utils.extensions.hideKeyBoard
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
+/**
+ * Created by Shubham Gupta on 01/06/2023
+ * Purpose: To provide all the basic necessary functionality to all the Fragments extended with this abstract class.
+ * */
 abstract class BaseFragment<Binding : ViewDataBinding, ViewModel : BaseViewModel> : Fragment(), View.OnClickListener {
 
   protected lateinit var baseActivity: BaseActivity<*>
@@ -42,7 +46,7 @@ abstract class BaseFragment<Binding : ViewDataBinding, ViewModel : BaseViewModel
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     baseActivity = activity as BaseActivity<*>
-    viewModel = ViewModelProvider(this).get(getViewModelClass())
+    viewModel = ViewModelProvider(this)[getViewModelClass()]
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

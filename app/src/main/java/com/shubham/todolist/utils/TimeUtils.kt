@@ -16,4 +16,8 @@ object TimeUtils {
         }
         return false
     }
+
+    fun getIfTimeIsPast12(hourOfDay : Int) : String {
+        return if (hourOfDay >= 12) "PM" else "AM"
+    }
 }

@@ -2,6 +2,9 @@ package com.shubham.todolist.ui.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shubham.todolist.R
@@ -21,8 +24,10 @@ import com.shubham.todolist.viewModel.TaskViewModel
 class TaskListFragment : BaseFragment<FragmentTaskListBinding, TaskViewModel>(),
     RecyclerItemClickListener, DialogClickListener {
 
+    private var menu_filter_ascending: MenuItem? = null
+    private var menu_filter_descending: MenuItem? = null
     private var taskList: ArrayList<Task> = arrayListOf()
-    private var positionGlobal:Int = 0
+    private var positionGlobal: Int = 0
     private var taskAdapter: AppBaseRecyclerViewAdapter<Task>? = null
     private lateinit var taskClicked: Task
 
@@ -60,9 +65,13 @@ class TaskListFragment : BaseFragment<FragmentTaskListBinding, TaskViewModel>(),
 
     private fun setUpUiForEmptyEdgeCase() {
         if (taskList.isEmpty().not()) {
+            menu_filter_ascending?.isVisible = true
+            menu_filter_descending?.isVisible = true
             binding.tvNoTasks.visibility = View.GONE
             binding.frameRvContent.visibility = View.VISIBLE
         } else {
+            menu_filter_ascending?.isVisible = false
+            menu_filter_descending?.isVisible = false
             binding.tvNoTasks.visibility = View.VISIBLE
             binding.frameRvContent.visibility = View.GONE
         }
@@ -102,8 +111,14 @@ class TaskListFragment : BaseFragment<FragmentTaskListBinding, TaskViewModel>(),
 
             RecyclerViewActionType.TASK_REMOVE_CLICK.ordinal -> {
                 positionGlobal = position
-                val message = baseActivity.getString(R.string.do_you_want_to_delete_message).replace("---", "\"${taskClicked.taskTitle.toString()}\"")
-                materialConfirmationDialog(baseActivity, this, message = message, title = getString(R.string.warning))
+                val message = baseActivity.getString(R.string.do_you_want_to_delete_message)
+                    .replace("---", "\"${taskClicked.taskTitle.toString()}\"")
+                materialConfirmationDialog(
+                    baseActivity,
+                    this,
+                    message = message,
+                    title = getString(R.string.warning)
+                )
             }
         }
     }
@@ -128,5 +143,38 @@ class TaskListFragment : BaseFragment<FragmentTaskListBinding, TaskViewModel>(),
 
     override fun onNegativeButtonClick() {
         //To handle Negative click
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_filter, menu)
+        menu_filter_ascending = menu.findItem(R.id.menu_filter_ascending)
+        menu_filter_descending = menu.findItem(R.id.menu_filter_descending)
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_filter_ascending -> {
+                //filterTasks(true)
+                true
+            }
+
+            R.id.menu_filter_descending -> {
+                //filterTasks(false)
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun filterTasks(isAscending: Boolean) {
+        if (isAscending)
+            taskList.sortByDescending { it.taskTimeInMilliseconds }
+        else
+            taskList.sortBy { it.taskTimeInMilliseconds }
+
+        taskAdapter?.notifyItemRangeChanged(0, taskList.size)
     }
 }

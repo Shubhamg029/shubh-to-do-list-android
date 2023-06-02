@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_filter_ascending"
+        android:icon="@drawable/ic_arrow_upward"
+        android:title="@string/ascending_order"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/menu_filter_descending"
+        android:icon="@drawable/ic_arrow_downward"
+        android:title="@string/descending_order_filter"
+        app:showAsAction="always" />
+</menu>
